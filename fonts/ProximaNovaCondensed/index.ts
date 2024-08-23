@@ -68,7 +68,7 @@ export const proximaNovaCondensed = localFont({
       style: "normal",
     },
     {
-      path: "./ProximaNovaCond-BlackIt",
+      path: "./ProximaNovaCond-BlackIt.woff2",
       weight: "900",
       style: "italic",
     },

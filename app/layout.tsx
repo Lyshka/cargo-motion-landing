@@ -18,9 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={"proximaNovaCondensed.className"}>
+      <body className={proximaNovaCondensed.className}>
         <NextTopLoader />
-        <Header />
+        {/* <Header /> */}
         {children}
         <Footer />
       </body>

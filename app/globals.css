@@ -32,7 +32,7 @@
 
   input,
   textarea {
-    @apply ring-0 outline-none;
+    @apply ring-0 outline-none border-none shadow-input bg-white w-full h-[50px] px-3.5 text-gray-65 text-lg leading-[23.4px];
   }
 }
 
@@ -47,6 +47,10 @@
 
   #handleMobileMenu svg {
     @apply absolute opacity-0;
+  }
+
+  #contact .socialList a {
+    @apply hover-opacity;
   }
 }
 
