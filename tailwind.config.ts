@@ -29,13 +29,14 @@ const config = {
         f7: "#F7F7F7",
         a9: "#A9A9A9",
         65: "#656565",
+        fc: "#FCFCFC",
       },
     },
     boxShadow: {
       button: "0px 4px 6px 0px #00000040",
       aboutCard: "0px 0px 8px 0px #0000001A",
       input: "0px 0px 3px 0px #0000001A",
-      header: "0px 4px 4px 0px #0000001A"
+      header: "0px 4px 4px 0px #0000001A",
     },
   },
   plugins: [require("tailwindcss-animate")],

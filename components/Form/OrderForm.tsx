@@ -3,14 +3,16 @@
 import { IMaskInput } from "react-imask";
 import Button from "../Button";
 import Conf from "../Conf";
+import { sendTelegram } from "@/hooks/sendTelegam";
 import { Controller, useForm } from "react-hook-form";
 import { useThankStore } from "@/store/modal/thankStore";
-import { sendTelegram } from "@/hooks/sendTelegam";
-import { toast } from "react-toastify";
 import { IForm } from "@/types/IForm";
+import { toast } from "react-toastify";
+import { useOrderStore } from "@/store/modal/orderStore";
 
-const ContactForm = () => {
-  const { setIsOpen } = useThankStore();
+const OrderForm = () => {
+  const { setIsOpen: setIsThankOpen } = useThankStore();
+  const { setIsOpen: setIsOrderOpen } = useOrderStore();
   const { register, handleSubmit, control, reset } = useForm<IForm>();
 
   const handleSubmitForm = handleSubmit(
@@ -20,14 +22,13 @@ const ContactForm = () => {
       const message = `
 <b>Имя: </b> ${name}
 <b>Телефон: </b> ${tel}
-<b>email: </b> ${email ? email : "Не указано"}
-<b>Название компании: </b> ${company}
 <b>Информация и грузе и маршруте: </b> ${info}`;
 
       const isOk = await sendTelegram(message);
 
       if (isOk) {
-        setIsOpen();
+        setIsThankOpen();
+        setIsOrderOpen();
         reset();
       }
     },
@@ -37,9 +38,6 @@ const ContactForm = () => {
       }
       if (errors.tel) {
         toast.error(errors.tel.message);
-      }
-      if (errors.company) {
-        toast.error(errors.company.message);
       }
       if (errors.info) {
         toast.error(errors.info.message);
@@ -51,10 +49,7 @@ const ContactForm = () => {
   );
 
   return (
-    <form
-      onSubmit={handleSubmitForm}
-      className="xl:max-w-[504px] flex-shrink-0 w-full bg-white xl:px-[30px] py-[30px] px-[15px] space-y-6 shadow-aboutCard"
-    >
+    <form onSubmit={handleSubmitForm} className="flex flex-col gap-6">
       <div className="space-y-3.5">
         <input
           {...register("name", {
@@ -79,26 +74,18 @@ const ContactForm = () => {
             />
           )}
         />
-        <input {...register("email")} type="email" placeholder="E-mail" />
-        <input
-          {...register("company", {
-            required: "Поле Компании не заполнено!",
-          })}
-          type="text"
-          placeholder="Название компании*"
-        />
         <textarea
           {...register("info", {
-            required: "Поле Информация о грузе не заполнено!",
+            required: "Поле Информация и грузe не заполнено!",
           })}
-          placeholder="Информация и грузе и маршруте*"
+          placeholder="Информация и грузе и маршруте"
         ></textarea>
       </div>
 
       <Conf register={register} />
 
-      <Button type="submit">Получить расчет</Button>
+      <Button>Заказать звонок</Button>
     </form>
   );
 };
-export default ContactForm;
+export default OrderForm;

@@ -1,13 +1,24 @@
-import Link from "next/link";
+import { UseFormRegister } from "react-hook-form";
 
-const Conf = () => {
+import Link from "next/link";
+import { FC } from "react";
+import { IForm } from "@/types/IForm";
+
+interface IProps {
+  register: UseFormRegister<IForm>;
+}
+
+const Conf: FC<IProps> = ({ register }) => {
   return (
     <label className="flex items-center gap-2.5 cursor-pointer">
       <div className="container-conf w-[18px] h-[18px] border border-gray-a9 flex justify-center items-center flex-shrink-0 relative bg-white">
         <input
+          {...register?.("conf", {
+            required:
+              "Вы должны согласиться с Политикой обработки персональных данных",
+          })}
           className="w-full h-full flex-shrink-0 opacity-0 absolute cursor-pointer"
           type="checkbox"
-          name="conf"
           defaultChecked
         />
 

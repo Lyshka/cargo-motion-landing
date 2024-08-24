@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Container from "./Container";
 import Button from "./Button";
+import Link from "next/link";
 
 const UpBlock = () => {
   return (
@@ -34,7 +35,9 @@ const UpBlock = () => {
         </div>
 
         <div className="flex items-center xl:flex-row flex-col gap-5">
-          <Button>Получить расчет</Button>
+          <Link href={"#contact"}>
+            <Button>Получить расчет</Button>
+          </Link>
 
           <span className="text-lg leading-[23.4px] text-white">
             Только для юр. лиц и ИП
